@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Development Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-hover: #7dd3fc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .project-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-block;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Project Portfolio</h1>
+        <p>Welcome! Click on any card below to launch and explore my live websites.</p>
+    </header>
+
+    <main class="portfolio-grid">
+        
+        <!-- PROJECT 1 -->
+        <section class="project-card">
+            <h2>First Project</h2>
+            <p>A description of your first website. Briefly explain what it does or what tools you used to build it.</p>
+            <!-- Change 'folder-name-1' to your exact folder name -->
+            <a href="./church/index.html" class="project-link">View Website Live</a>
+        </section>
+
+        <!-- PROJECT 2 -->
+        <section class="project-card">
+            <h2>Second Project</h2>
+            <p>A description of your second website. Briefly explain what it does or what tools you used to build it.</p>
+            <!-- Change 'folder-name-2' to your exact folder name -->
+            <a href="./organisation/index.html" class="project-link">View Website Live</a>
+        </section>
+
+        <!-- PROJECT 3 -->
+        <section class="project-card">
+            <h2>Third Project</h2>
+            <p>A description of your third website. Briefly explain what it does or what tools you used to build it.</p>
+            <!-- Change 'folder-name-3' to your exact folder name -->
+            <a href="./organisationP2/mknotbsmu.html" class="project-link">View Website Live</a>
+        </section>
+
+    </main>
+
+</body>
+</html>
