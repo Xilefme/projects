@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate — BrightRoots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:  #1B4332;
+      --green-mid:   #2D6A4F;
+      --green-light: #52B788;
+      --green-pale:  #D8F3DC;
+      --amber:       #F59E0B;
+      --amber-light: #FEF3C7;
+      --amber-dark:  #D97706;
+      --white:       #FFFFFF;
+      --off-white:   #FAFAF8;
+      --charcoal:    #1C1917;
+      --gray:        #6B7280;
+      --gray-light:  #F3F4F6;
+      --error:       #DC2626;
+      --success:     #16A34A;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--off-white);
+      line-height: 1.6;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(27,67,50,0.97);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .nav-logo-icon { width: 36px; height: 36px; }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.01em;
+    }
+    .nav-logo-text span { color: var(--amber); }
+    .nav-back {
+      display: flex; align-items: center; gap: 0.4rem;
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500;
+      transition: color 200ms;
+    }
+    .nav-back:hover { color: var(--amber); }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      background: var(--green-deep);
+      padding: 7rem 2rem 4rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 60px;
+      background: var(--off-white);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .page-header-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.4);
+      color: var(--amber);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.3rem 0.9rem; border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.15; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .page-header h1 span { color: var(--amber); }
+    .page-header p {
+      color: rgba(255,255,255,0.68);
+      font-size: 1rem; max-width: 480px; margin: 0 auto;
+    }
+
+    /* ===== TRUST STRIP ===== */
+    .trust-strip {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+      padding: 1.5rem 2rem 2.5rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--gray); font-weight: 500;
+    }
+    .trust-item svg { flex-shrink: 0; }
+
+    /* ===== MAIN LAYOUT ===== */
+    .donate-layout {
+      max-width: 1060px; margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ===== FORM CARD ===== */
+    .form-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    }
+
+    .form-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    /* Frequency toggle */
+    .freq-toggle {
+      display: flex;
+      background: var(--gray-light);
+      border-radius: 50px; padding: 4px;
+      margin-bottom: 1.8rem;
+    }
+    .freq-btn {
+      flex: 1; padding: 0.6rem 1rem;
+      border: none; background: none;
+      border-radius: 50px; cursor: pointer;
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--gray);
+      transition: all 200ms ease;
+    }
+    .freq-btn.active {
+      background: var(--green-deep);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(27,67,50,0.25);
+    }
+
+    /* Amount grid */
+    .amount-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem; margin-bottom: 1rem;
+    }
+    .amount-chip {
+      padding: 0.75rem 0.5rem;
+      border: 1.5px solid var(--gray-light);
+      border-radius: 12px;
+      background: none; cursor: pointer;
+      text-align: center; transition: all 200ms ease;
+    }
+    .amount-chip:hover { border-color: var(--green-light); background: var(--green-pale); }
+    .amount-chip.active {
+      border-color: var(--green-deep);
+      background: var(--green-pale);
+    }
+    .amount-chip-kes { font-size: 1rem; font-weight: 700; color: var(--green-deep); display: block; }
+    .amount-chip-desc { font-size: 0.72rem; color: var(--gray); display: block; margin-top: 2px; }
+
+    .custom-amount-wrap {
+      position: relative; margin-bottom: 1.8rem;
+    }
+    .custom-amount-prefix {
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      font-weight: 600; color: var(--gray); font-size: 0.9rem;
+    }
+    .custom-input {
+      width: 100%; padding: 0.75rem 1rem 0.75rem 3.5rem;
+      border: 1.5px solid var(--gray-light);
+      border-radius: 12px; font-size: 1rem;
+      color: var(--charcoal); background: var(--white);
+      transition: border-color 200ms;
+      font-family: 'Inter', sans-serif;
+    }
+    .custom-input:focus { border-color: var(--green-mid); outline: none; }
+    .custom-input::placeholder { color: #C4C4C4; }
+
+    /* Recurring nudge */
+    .recurring-nudge {
+      background: var(--amber-light);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 12px; padding: 0.9rem 1rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      margin-bottom: 1.8rem; font-size: 0.85rem; color: var(--charcoal);
+      line-height: 1.5;
+    }
+    .recurring-nudge svg { flex-shrink: 0; margin-top: 2px; }
+
+    /* Form fields */
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .field:last-of-type { margin-bottom: 0; }
+    label { font-size: 0.85rem; font-weight: 600; color: var(--charcoal); }
+    label .req { color: var(--error); margin-left: 2px; }
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      padding: 0.7rem 1rem;
+      border: 1.5px solid var(--gray-light);
+      border-radius: 10px; font-size: 0.95rem;
+      color: var(--charcoal); background: var(--white);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 200ms;
+      width: 100%;
+    }
+    input:focus, select:focus { border-color: var(--green-mid); outline: none; }
+    .field-hint { font-size: 0.78rem; color: var(--gray); }
+
+    /* Payment method */
+    .payment-methods {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem; margin-bottom: 1.5rem;
+    }
+    .pay-method {
+      border: 1.5px solid var(--gray-light);
+      border-radius: 12px; padding: 0.9rem 0.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      cursor: pointer; transition: all 200ms ease; background: none;
+    }
+    .pay-method:hover { border-color: var(--green-light); background: var(--green-pale); }
+    .pay-method.active { border-color: var(--green-deep); background: var(--green-pale); }
+    .pay-method-label { font-size: 0.78rem; font-weight: 600; color: var(--charcoal); }
+
+    .mpesa-fields { display: flex; flex-direction: column; gap: 1rem; }
+
+    /* Checkbox */
+    .checkbox-field {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      font-size: 0.85rem; color: var(--gray); line-height: 1.5;
+      margin-bottom: 1rem; cursor: pointer;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 18px; height: 18px; flex-shrink: 0;
+      margin-top: 2px; accent-color: var(--green-deep);
+      cursor: pointer;
+    }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%; padding: 1rem;
+      background: var(--amber);
+      color: var(--charcoal);
+      border: none; border-radius: 50px;
+      font-size: 1.05rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      transition: background 200ms, transform 150ms, box-shadow 200ms;
+      font-family: 'Inter', sans-serif;
+      margin-top: 1.5rem;
+    }
+    .submit-btn:hover {
+      background: var(--amber-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,158,11,0.35);
+    }
+    .submit-btn:active { transform: translateY(0); }
+
+    .secure-note {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      font-size: 0.78rem; color: var(--gray); margin-top: 0.9rem;
+    }
+
+    .form-divider {
+      border: none; border-top: 1px solid var(--gray-light);
+      margin: 1.8rem 0;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .sidebar-card {
+      background: var(--white);
+      border-radius: 20px; padding: 1.8rem;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .sidebar-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 1.2rem;
+    }
+
+    /* Impact calculator */
+    .impact-items { display: flex; flex-direction: column; gap: 0.75rem; }
+    .impact-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.8rem;
+      background: var(--off-white); border-radius: 12px;
+      font-size: 0.85rem;
+      transition: background 200ms;
+      cursor: default;
+    }
+    .impact-item.highlighted { background: var(--green-pale); }
+    .impact-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .impact-item-text strong { display: block; font-weight: 600; color: var(--charcoal); font-size: 0.85rem; }
+    .impact-item-text span { font-size: 0.78rem; color: var(--gray); }
+
+    /* Allocation */
+    .allocation-bars { display: flex; flex-direction: column; gap: 0.6rem; }
+    .alloc-row { display: flex; flex-direction: column; gap: 0.25rem; }
+    .alloc-label { display: flex; justify-content: space-between; font-size: 0.8rem; }
+    .alloc-label span:first-child { color: var(--charcoal); font-weight: 500; }
+    .alloc-label span:last-child { color: var(--green-mid); font-weight: 700; }
+    .alloc-bar-bg {
+      height: 8px; background: var(--gray-light); border-radius: 50px; overflow: hidden;
+    }
+    .alloc-bar-fill {
+      height: 100%; border-radius: 50px;
+      background: var(--green-light);
+      transition: width 600ms ease;
+    }
+    .alloc-bar-fill.amber { background: var(--amber); }
+    .alloc-bar-fill.mid { background: var(--green-mid); }
+
+    /* Testimonial mini */
+    .mini-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 0.92rem;
+      color: var(--green-deep); line-height: 1.65;
+      margin-bottom: 0.8rem;
+    }
+    .mini-quote::before { content: '\201C'; font-size: 1.4em; color: var(--amber); line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
+    .mini-author { font-size: 0.78rem; font-weight: 600; color: var(--gray); }
+
+    /* ===== SUCCESS STATE ===== */
+    .success-state {
+      display: none;
+      text-align: center; padding: 3rem 2rem;
+    }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .success-state h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 700; color: var(--green-deep);
+      margin-bottom: 0.6rem;
+    }
+    .success-state p { color: var(--gray); font-size: 0.95rem; line-height: 1.7; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--charcoal);
+      padding: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; margin: 0 0.75rem; }
+    footer a:hover { color: var(--amber); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .donate-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+      .sidebar-card:not(:first-child) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .form-card { padding: 1.5rem; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .field-row { grid-template-columns: 1fr; }
+      .payment-methods { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="BrightRoots home">
+    <img src="pics/log2.png" alt="BrightRoots Logo" style="height: 72px; width: auto;">
+    <span class="nav-logo-text">Mkono wa <span>Tabasamu</span></span>
+  </a>
+  <a href="brightroots-charity.html" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-eyebrow">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    Secure Donation
+  </div>
+  <h1>Give a child a <span>brighter</span> future</h1>
+  <p>97 cents of every shilling you give goes directly to food, education, and shelter for children in our community.</p>
+</header>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip" role="list" aria-label="Trust indicators">
+  <div class="trust-item" role="listitem">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Secured & Encrypted
+  </div>
+  <div class="trust-item" role="listitem">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Registered Non-Profit
+  </div>
+  <div class="trust-item" role="listitem">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+    Donation Receipt Issued
+  </div>
+  <div class="trust-item" role="listitem">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/><path d="M12 6v6l4 2"/></svg>
+    Spend Report in 30 Days
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<main class="donate-layout">
+
+  <!-- FORM -->
+  <div>
+    <div class="form-card" id="donate-form-wrap">
+
+      <!-- Step 1: Amount -->
+      <h2 class="form-section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-3px;margin-right:6px;" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Choose Your Amount
+      </h2>
+
+      <!-- Frequency -->
+      <div class="freq-toggle" role="group" aria-label="Donation frequency">
+        <button class="freq-btn active" type="button" data-freq="once" aria-pressed="true">Give Once</button>
+        <button class="freq-btn" type="button" data-freq="monthly" aria-pressed="false">Give Monthly</button>
+      </div>
+
+      <!-- Amount chips -->
+      <div class="amount-grid" role="group" aria-label="Suggested donation amounts">
+        <button class="amount-chip" type="button" data-amount="500">
+          <span class="amount-chip-kes">KES 500</span>
+          <span class="amount-chip-desc">Feeds a child 1 week</span>
+        </button>
+        <button class="amount-chip active" type="button" data-amount="1000">
+          <span class="amount-chip-kes">KES 1,000</span>
+          <span class="amount-chip-desc">School supplies (1 mo)</span>
+        </button>
+        <button class="amount-chip" type="button" data-amount="2500">
+          <span class="amount-chip-kes">KES 2,500</span>
+          <span class="amount-chip-desc">Full care package</span>
+        </button>
+        <button class="amount-chip" type="button" data-amount="5000">
+          <span class="amount-chip-kes">KES 5,000</span>
+          <span class="amount-chip-desc">Shelter 2 weeks</span>
+        </button>
+        <button class="amount-chip" type="button" data-amount="10000">
+          <span class="amount-chip-kes">KES 10,000</span>
+          <span class="amount-chip-desc">Sponsor 1 child/month</span>
+        </button>
+        <button class="amount-chip" type="button" data-amount="custom">
+          <span class="amount-chip-kes">Custom</span>
+          <span class="amount-chip-desc">Your choice</span>
+        </button>
+      </div>
+
+      <!-- Custom amount -->
+      <div class="custom-amount-wrap" id="custom-amount-wrap" style="display:none;">
+        <span class="custom-amount-prefix">KES</span>
+        <input type="number" class="custom-input" id="custom-amount" placeholder="Enter amount" min="50" aria-label="Custom donation amount in Kenyan Shillings" />
+      </div>
+
+      <!-- Monthly nudge -->
+      <div class="recurring-nudge" id="monthly-nudge" style="display:none;" role="note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/><path d="M12 8v4l3 3"/></svg>
+        <span>Monthly giving provides reliable, ongoing support — it's the most impactful way to help. Your card is charged on the same date each month and you can cancel anytime.</span>
+      </div>
+
+      <hr class="form-divider" />
+
+      <!-- Step 2: Your Details -->
+      <h2 class="form-section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-3px;margin-right:6px;" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Your Details
+      </h2>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="first-name">First Name <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="first-name" name="first-name" required autocomplete="given-name" placeholder="e.g. Amara" />
+        </div>
+        <div class="field">
+          <label for="last-name">Last Name <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="last-name" name="last-name" required autocomplete="family-name" placeholder="e.g. Kimani" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        <span class="field-hint">Your receipt and impact report will be sent here.</span>
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+254 700 000 000" />
+        <span class="field-hint">Required for M-Pesa payments.</span>
+      </div>
+
+      <hr class="form-divider" />
+
+      <!-- Step 3: Payment -->
+      <h2 class="form-section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-3px;margin-right:6px;" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payment Method
+      </h2>
+
+      <div class="payment-methods" role="group" aria-label="Choose a payment method">
+        <button class="pay-method active" type="button" data-method="mpesa" aria-pressed="true">
+          <svg width="28" height="20" viewBox="0 0 60 40" fill="none" aria-hidden="true">
+            <rect width="60" height="40" rx="6" fill="#007C49"/>
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="12" font-family="Inter,sans-serif" font-weight="700">M-PESA</text>
+          </svg>
+          <span class="pay-method-label">M-Pesa</span>
+        </button>
+        <button class="pay-method" type="button" data-method="card" aria-pressed="false">
+          <svg width="28" height="20" viewBox="0 0 60 40" fill="none" aria-hidden="true">
+            <rect width="60" height="40" rx="6" fill="#1A1F71"/>
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="10" font-family="Inter,sans-serif" font-weight="700">VISA</text>
+          </svg>
+          <span class="pay-method-label">Card</span>
+        </button>
+        <button class="pay-method" type="button" data-method="bank" aria-pressed="false">
+          <svg width="28" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span class="pay-method-label">Bank</span>
+        </button>
+      </div>
+
+      <!-- M-Pesa fields -->
+      <div id="method-mpesa" class="mpesa-fields">
+        <div class="field">
+          <label for="mpesa-phone">M-Pesa Number <span class="req" aria-hidden="true">*</span></label>
+          <input type="tel" id="mpesa-phone" name="mpesa-phone" placeholder="+254 700 000 000" />
+          <span class="field-hint">You will receive an STK push prompt on this number to confirm payment.</span>
+        </div>
+      </div>
+
+      <!-- Card fields -->
+      <div id="method-card" style="display:none;">
+        <div class="field">
+          <label for="card-number">Card Number <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="card-expiry">Expiry <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="card-expiry" name="card-expiry" placeholder="MM / YY" maxlength="7" autocomplete="cc-exp" />
+          </div>
+          <div class="field">
+            <label for="card-cvv">CVV <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="card-cvv" name="card-cvv" placeholder="123" maxlength="4" autocomplete="cc-csc" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank transfer -->
+      <div id="method-bank" style="display:none;">
+        <div style="background:var(--green-pale); border-radius:12px; padding:1rem 1.2rem; font-size:0.88rem; line-height:1.8; color:var(--green-deep);">
+          <strong>Bank Transfer Details</strong><br/>
+          Bank: KCB Bank Kenya<br/>
+          Account Name: BrightRoots Community Trust<br/>
+          Account Number: 1234567890<br/>
+          Branch: Nairobi Central<br/>
+          Reference: <em>Your full name</em>
+        </div>
+      </div>
+
+      <hr class="form-divider" />
+
+      <!-- Checkboxes -->
+      <label class="checkbox-field">
+        <input type="checkbox" id="anonymous" name="anonymous" />
+        I would like to donate anonymously
+      </label>
+      <label class="checkbox-field">
+        <input type="checkbox" id="newsletter" name="newsletter" checked />
+        Send me impact updates and stories from BrightRoots (monthly, unsubscribe anytime)
+      </label>
+      <label class="checkbox-field">
+        <input type="checkbox" id="agree" name="agree" required />
+        I agree to the <a href="#" style="color:var(--green-mid);">terms of donation</a> and confirm this is a voluntary gift<span class="req" aria-hidden="true">*</span>
+      </label>
+
+      <button type="button" class="submit-btn" id="donate-submit" aria-label="Complete donation">
+        Complete Donation — KES <span id="btn-amount">1,000</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </button>
+
+      <p class="secure-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-bit SSL encrypted · Your information is never sold or shared
+      </p>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="form-card success-state" id="success-state" aria-live="polite">
+      <div class="success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Thank you for giving!</h2>
+      <p>Your donation is confirmed. A receipt has been emailed to you, and you'll receive a full impact report within 30 days showing exactly how your gift was used.</p>
+      <a href="brightroots-charity.html" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1.5rem;color:var(--green-mid);font-weight:600;text-decoration:none;">
+        ← Back to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Donation impact information">
+
+    <div class="sidebar-card">
+      <h3 class="sidebar-card-title">Your impact at KES <span id="impact-amount">1,000</span></h3>
+      <div class="impact-items">
+        <div class="impact-item highlighted" id="impact-meals">
+          <div class="impact-icon" style="background:#D8F3DC;" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="impact-item-text">
+            <strong id="meals-count">~14 meals</strong>
+            <span>Nutritious food for a child</span>
+          </div>
+        </div>
+        <div class="impact-item" id="impact-books">
+          <div class="impact-icon" style="background:#FEF3C7;" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="impact-item-text">
+            <strong id="books-count">School supplies</strong>
+            <span>Exercise books & stationery</span>
+          </div>
+        </div>
+        <div class="impact-item" id="impact-nights">
+          <div class="impact-icon" style="background:#DBEAFE;" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </div>
+          <div class="impact-item-text">
+            <strong id="nights-count">Safe shelter</strong>
+            <span>Nights of secure housing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3 class="sidebar-card-title">Where your money goes</h3>
+      <div class="allocation-bars">
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Food & Nutrition</span><span>38%</span></div>
+          <div class="alloc-bar-bg"><div class="alloc-bar-fill" style="width:38%;"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Education</span><span>31%</span></div>
+          <div class="alloc-bar-bg"><div class="alloc-bar-fill amber" style="width:31%;"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Shelter & Safety</span><span>28%</span></div>
+          <div class="alloc-bar-bg"><div class="alloc-bar-fill mid" style="width:28%;"></div></div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label"><span>Administration</span><span>3%</span></div>
+          <div class="alloc-bar-bg"><div class="alloc-bar-fill" style="width:3%; background:#CBD5E1;"></div></div>
+        </div>
+      </div>
+      <p style="font-size:0.78rem;color:var(--gray);margin-top:0.9rem;line-height:1.5;">Independently audited annually. Full financial report available on request.</p>
+    </div>
+
+    <div class="sidebar-card">
+      <p class="mini-quote">Because of donors like you, my daughter now eats every day and loves going to school. She wants to be a doctor.</p>
+      <div class="mini-author">— Grace W., Parent, Eastlands</div>
+    </div>
+
+  </aside>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a href="brightroots-charity.html">Home</a>
+  <a href="brightroots-contact.html">Contact Us</a>
+  <a href="#">Privacy Policy</a>
+  <br/><br/>
+  © 2026 Mkono Wa Tabasamu · Registered Non-Profit · Nairobi, Kenya
+</footer>
+
+<script>
+  // --- Frequency toggle ---
+  const freqBtns = document.querySelectorAll('.freq-btn');
+  freqBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      freqBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+      document.getElementById('monthly-nudge').style.display = btn.dataset.freq === 'monthly' ? 'flex' : 'none';
+    });
+  });
+
+  // --- Amount chips ---
+  let selectedAmount = 1000;
+  const amountChips = document.querySelectorAll('.amount-chip');
+  const customWrap = document.getElementById('custom-amount-wrap');
+  const customInput = document.getElementById('custom-amount');
+
+  function updateAmountUI(amount) {
+    selectedAmount = amount;
+    const display = amount === 'custom' ? '' : Number(amount).toLocaleString();
+    document.getElementById('btn-amount').textContent = amount === 'custom' ? '—' : display;
+    document.getElementById('impact-amount').textContent = amount === 'custom' ? '—' : display;
+    updateImpact(amount === 'custom' ? 0 : Number(amount));
+  }
+
+  amountChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      amountChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const val = chip.dataset.amount;
+      customWrap.style.display = val === 'custom' ? 'block' : 'none';
+      if (val !== 'custom') updateAmountUI(val);
+      else { selectedAmount = 'custom'; document.getElementById('btn-amount').textContent = '—'; }
+    });
+  });
+
+  customInput.addEventListener('input', () => {
+    const val = parseInt(customInput.value, 10) || 0;
+    document.getElementById('btn-amount').textContent = val ? val.toLocaleString() : '—';
+    document.getElementById('impact-amount').textContent = val ? val.toLocaleString() : '—';
+    updateImpact(val);
+  });
+
+  function updateImpact(amount) {
+    const meals = Math.round(amount / 70);
+    document.getElementById('meals-count').textContent = meals > 0 ? `~${meals} meals` : '—';
+    const nights = Math.round(amount / 350);
+    document.getElementById('nights-count').textContent = nights > 0 ? `~${nights} nights` : '—';
+    document.getElementById('books-count').textContent = amount >= 500 ? 'School supplies' : amount > 0 ? 'Partial supplies' : '—';
+  }
+  updateImpact(1000);
+
+  // --- Payment methods ---
+  const payMethods = document.querySelectorAll('.pay-method');
+  payMethods.forEach(btn => {
+    btn.addEventListener('click', () => {
+      payMethods.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+      document.getElementById('method-mpesa').style.display = 'none';
+      document.getElementById('method-card').style.display = 'none';
+      document.getElementById('method-bank').style.display = 'none';
+      const shown = document.getElementById('method-' + btn.dataset.method);
+      if (shown) shown.style.display = btn.dataset.method === 'mpesa' ? 'flex' : 'block';
+    });
+  });
+
+  // --- Submit ---
+  document.getElementById('donate-submit').addEventListener('click', () => {
+    const agree = document.getElementById('agree');
+    if (!agree.checked) { agree.focus(); alert('Please confirm the terms to proceed.'); return; }
+    const btn = document.getElementById('donate-submit');
+    btn.textContent = 'Processing…'; btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('donate-form-wrap').style.display = 'none';
+      const s = document.getElementById('success-state');
+      s.style.display = 'block';
+      s.focus();
+    }, 1800);
+  });
+
+  // Card number formatting
+  const cardNum = document.getElementById('card-number');
+  if (cardNum) {
+    cardNum.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g,'').substring(0,16);
+      e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
+    });
+  }
+</script>
+</body>
+</html>

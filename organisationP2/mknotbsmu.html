@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrightRoots — Nourishing Children, Building Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep:   #1B4332;
+      --green-mid:    #2D6A4F;
+      --green-light:  #52B788;
+      --green-pale:   #D8F3DC;
+      --amber:        #F59E0B;
+      --amber-light:  #FEF3C7;
+      --amber-dark:   #D97706;
+      --white:        #FFFFFF;
+      --off-white:    #FAFAF8;
+      --charcoal:     #1C1917;
+      --gray:         #6B7280;
+      --gray-light:   #F3F4F6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(27, 67, 50, 0.97);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo-text span { color: var(--amber); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 200ms ease;
+    }
+    .nav-links a:hover { color: var(--amber); }
+
+    .nav-cta {
+      background: var(--amber);
+      color: var(--charcoal) !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: background 200ms ease, transform 150ms ease !important;
+    }
+    .nav-cta:hover { background: var(--amber-dark) !important; transform: translateY(-1px); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all 200ms ease;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background: var(--green-deep);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 7rem 2rem 4rem;
+    }
+
+    /* Hero Video Wrapper */
+    .hero-video-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 75%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Gradient overlay that fades video to transparent on the left side */
+    .hero-video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        var(--green-deep) 0%,
+        rgba(27, 67, 50, 0.85) 20%,
+        rgba(27, 67, 50, 0.4) 45%,
+        transparent 70%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* For browsers that support mask-image */
+    @supports (mask-image: linear-gradient(to right, transparent, black)) {
+      .hero-video-wrapper {
+        mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+      }
+      .hero-video-overlay {
+        display: none;
+      }
+    }
+
+    /* Ripple rings — the signature element */
+    .hero-rings {
+      position: absolute; right: -5%; top: 50%;
+      transform: translateY(-50%);
+      width: min(65vw, 680px); height: min(65vw, 680px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.3;
+    }
+    .hero-rings circle {
+      fill: none;
+      stroke: rgba(82, 183, 136, 0.18);
+      animation: ring-pulse 3s ease-in-out infinite;
+    }
+    .hero-rings circle:nth-child(2) { animation-delay: 0.5s; }
+    .hero-rings circle:nth-child(3) { animation-delay: 1s; }
+    .hero-rings circle:nth-child(4) { animation-delay: 1.5s; }
+    .hero-child-silhouette { fill: rgba(82, 183, 136, 0.22); }
+
+    @keyframes ring-pulse {
+      0%, 100% { stroke-opacity: 0.18; }
+      50% { stroke-opacity: 0.38; }
+    }
+
+    /* Ensure hero content stays above video */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--amber);
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline .accent-word {
+      color: var(--amber);
+      position: relative; display: inline-block;
+    }
+    .hero-headline .accent-word::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 3px;
+      background: var(--amber);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underline-in 0.8s 0.6s ease forwards;
+    }
+    @keyframes underline-in {
+      to { transform: scaleX(1); }
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.1rem; line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--charcoal);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--amber-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,158,11,0.35);
+    }
+
+    .btn-ghost {
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-weight: 500; font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: border-color 200ms, background 200ms, transform 150ms;
+      cursor: pointer;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+      margin-top: 0.25rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* ===== PILLARS ===== */
+    .pillars {
+      padding: 6rem 2rem;
+      background: var(--off-white);
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--green-deep);
+      text-align: center;
+      line-height: 1.2;
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1rem; line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pillar-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.2rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 250ms ease, box-shadow 250ms ease;
+      position: relative; overflow: hidden;
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--card-accent, var(--green-light));
+    }
+    .pillar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.09);
+    }
+    .pillar-card:nth-child(1) { --card-accent: #52B788; }
+    .pillar-card:nth-child(2) { --card-accent: #F59E0B; }
+    .pillar-card:nth-child(3) { --card-accent: #3B82F6; }
+    .pillar-card:nth-child(4) { --card-accent: #EC4899; }
+
+    .pillar-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.3rem;
+    }
+    .pillar-card:nth-child(1) .pillar-icon { background: #D8F3DC; }
+    .pillar-card:nth-child(2) .pillar-icon { background: #FEF3C7; }
+    .pillar-card:nth-child(3) .pillar-icon { background: #DBEAFE; }
+    .pillar-card:nth-child(4) .pillar-icon { background: #FCE7F3; }
+
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.6rem;
+    }
+    .pillar-desc {
+      color: var(--gray);
+      font-size: 0.93rem; line-height: 1.7;
+    }
+
+    /* ===== IMPACT BANNER ===== */
+    .impact-banner {
+      background: var(--green-deep);
+      padding: 5rem 2rem;
+    }
+    .impact-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .impact-text .section-title,
+    .impact-text .section-label { text-align: left; margin-left: 0; }
+    .impact-text .section-title { color: var(--white); }
+    .impact-text .section-label { color: var(--amber); }
+    .impact-text .section-sub { text-align: left; margin-left: 0; color: rgba(255,255,255,0.65); }
+
+    .impact-metrics {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .impact-metric {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 1.5rem;
+    }
+    .impact-metric-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .impact-metric-label {
+      font-size: 0.85rem; color: rgba(255,255,255,0.65);
+      margin-top: 0.4rem; line-height: 1.4;
+    }
+
+    /* ===== PROGRAMS ===== */
+    .programs {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+
+    .programs-list {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 3rem;
+    }
+
+    .program-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .program-item:nth-child(even) { direction: rtl; }
+    .program-item:nth-child(even) > * { direction: ltr; }
+
+    .program-visual {
+      border-radius: 24px; overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .program-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+
+    .program-tag {
+      display: inline-block;
+      background: var(--amber-light);
+      color: var(--amber-dark);
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .program-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 0.8rem; line-height: 1.25;
+    }
+    .program-desc {
+      color: var(--gray);
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .program-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--green-mid); font-weight: 600;
+      text-decoration: none; font-size: 0.95rem;
+      transition: gap 200ms ease;
+    }
+    .program-link:hover { gap: 0.7rem; }
+
+    /* ===== STORIES ===== */
+    .stories {
+      padding: 6rem 2rem;
+      background: var(--amber-light);
+    }
+    .stories-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .story-card {
+      background: var(--white);
+      border-radius: 20px; padding: 2rem;
+      transition: transform 250ms ease, box-shadow 250ms ease;
+    }
+    .story-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .story-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-style: italic;
+      color: var(--green-deep);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .story-quote::before { content: '\201C'; font-size: 1.5em; color: var(--amber); line-height: 0; vertical-align: -0.3em; margin-right: 2px; }
+    .story-author {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .story-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%; background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; color: var(--green-deep);
+    }
+    .story-name { font-weight: 600; font-size: 0.9rem; color: var(--charcoal); }
+    .story-role { font-size: 0.8rem; color: var(--gray); }
+
+    /* ===== GET INVOLVED ===== */
+    .get-involved {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+    .involved-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .involved-card {
+      border-radius: 20px; padding: 2.2rem;
+      border: 2px solid var(--card-border, var(--gray-light));
+      transition: border-color 250ms, transform 250ms, box-shadow 250ms;
+      cursor: pointer;
+    }
+    .involved-card:hover {
+      border-color: var(--green-light);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(27,67,50,0.1);
+    }
+    .involved-card.featured {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+    }
+    .involved-card.featured .involved-title { color: var(--white); }
+    .involved-card.featured .involved-desc { color: rgba(255,255,255,0.65); }
+    .involved-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .involved-card.featured .involved-icon { background: rgba(255,255,255,0.12); }
+    .involved-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--green-deep); margin-bottom: 0.5rem;
+    }
+    .involved-desc {
+      font-size: 0.9rem; color: var(--gray);
+      line-height: 1.65; margin-bottom: 1.3rem;
+    }
+    .btn-small {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.3rem; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: all 200ms ease;
+    }
+    .btn-small-green {
+      background: var(--amber);
+      color: var(--charcoal);
+    }
+    .btn-small-green:hover { background: var(--amber-dark); transform: translateY(-1px); }
+    .btn-small-outline {
+      border: 1.5px solid var(--green-light);
+      color: var(--green-mid);
+    }
+    .btn-small-outline:hover { background: var(--green-pale); }
+
+    /* ===== DONATE ===== */
+    .donate-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .donate-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2352B788' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .donate-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
+    .donate-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; color: var(--white);
+      line-height: 1.2; margin-bottom: 1rem;
+    }
+    .donate-sub {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75; margin-bottom: 2.5rem;
+    }
+    .donate-amounts {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .amount-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.08);
+      color: var(--white); font-weight: 500;
+      cursor: pointer; transition: all 200ms ease;
+      font-size: 0.95rem;
+    }
+    .amount-btn:hover, .amount-btn.active {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--charcoal);
+    }
+    .donate-btn-wrap { display: flex; justify-content: center; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--charcoal);
+      padding: 4rem 2rem 2rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-brand .nav-logo-text { font-size: 1.2rem; }
+    .footer-tagline {
+      font-size: 0.88rem; line-height: 1.65;
+      margin-top: 0.75rem; margin-bottom: 1.5rem;
+    }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 200ms;
+      cursor: pointer;
+    }
+    .social-icon:hover { background: var(--amber); }
+    .footer-col h4 {
+      color: var(--white); font-size: 0.85rem;
+      font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a {
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 0.88rem; transition: color 200ms;
+    }
+    .footer-col a:hover { color: var(--amber); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: 0.82rem;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.55); text-decoration: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      
+      .hero-video-wrapper {
+        width: 100%;
+        opacity: 0.4;
+      }
+      .hero-video-overlay {
+        background: linear-gradient(
+          to right,
+          var(--green-deep) 0%,
+          var(--green-deep) 100%
+        );
+        opacity: 0.6;
+      }
+      @supports (mask-image: linear-gradient(to right, transparent, black)) {
+        .hero-video-wrapper {
+          mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+        }
+        .hero-video-overlay {
+          display: none;
+        }
+      }
+      
+      .hero-rings { opacity: 0.15; }
+      .impact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .impact-text .section-title,
+      .impact-text .section-label,
+      .impact-text .section-sub { text-align: center; margin-left: auto; }
+      .program-item { grid-template-columns: 1fr; gap: 1.5rem; }
+      .program-item:nth-child(even) { direction: ltr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .impact-metrics { grid-template-columns: 1fr; }
+      .hero-video-wrapper {
+        opacity: 0.3;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus styles */
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="BrightRoots home">
+    <img src="pics/log2.png" alt="BrightRoots Logo" style="height: 72px; width: auto;">
+    <span class="nav-logo-text">Mkono wa <span>Tabasamu</span></span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#pillars">What We Do</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#impact">Our Impact</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="donation.html" class="nav-cta">Donate Now</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" role="banner">
+  <!-- Video background with gradient mask -->
+  <div class="hero-video-wrapper">
+    <video 
+      class="hero-video" 
+      autoplay 
+      muted 
+      loop 
+      playsinline
+    >
+      <!-- Replace the src with your video file path -->
+      <source src="videos/video1.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <!-- Gradient overlay that fades video from right to left -->
+    <div class="hero-video-overlay"></div>
+  </div>
+
+  <!-- Signature ripple rings -->
+  <svg class="hero-rings" viewBox="0 0 680 680" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="340" cy="340" r="120" stroke-width="1.5"/>
+    <circle cx="340" cy="340" r="200" stroke-width="1.2"/>
+    <circle cx="340" cy="340" r="280" stroke-width="1"/>
+    <circle cx="340" cy="340" r="330" stroke-width="0.8"/>
+    <ellipse cx="340" cy="270" rx="28" ry="28" class="hero-child-silhouette"/>
+    <path d="M312 340 Q340 410 368 340 Q354 370 340 380 Q326 370 312 340Z" class="hero-child-silhouette"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" aria-label="Organisation type">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      Community-Driven Children's Organisation
+    </div>
+
+    <h1 class="hero-headline">
+      Every child deserves to<br/>
+      <span class="accent-word">thrive</span> — not just survive.
+    </h1>
+
+    <p class="hero-sub">
+      Mkono wa Tabasamu provides nutritious meals, quality education, and safe shelter to vulnerable children across our community. Because a fed, educated, and sheltered child becomes a stronger community.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#donate" class="btn-primary">
+        Donate Today
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#programs" class="btn-ghost">
+        See Our Programs
+      </a>
+    </div>
+
+    <div class="hero-stats" aria-label="Organisation statistics">
+      <div>
+        <div class="hero-stat-num">2,400+</div>
+        <div class="hero-stat-label">Children Served</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">12</div>
+        <div class="hero-stat-label">Communities Reached</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">8 yrs</div>
+        <div class="hero-stat-label">Of Impact</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PILLARS ===== -->
+<section class="pillars" id="pillars" aria-labelledby="pillars-title">
+  <p class="section-label">Our Four Pillars</p>
+  <h2 class="section-title" id="pillars-title">A whole-child approach to community care</h2>
+  <p class="section-sub">We believe children need more than one kind of support. Our four pillars work together to address the full picture of a child's wellbeing.</p>
+
+  <div class="pillars-grid">
+    <article class="pillar-card">
+      <div class="pillar-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+      <h3 class="pillar-title">Food & Nutrition</h3>
+      <p class="pillar-desc">Three nutritious meals a day for every child in our programme. Our community kitchens prepare culturally familiar, balanced food that fuels learning and growth.</p>
+    </article>
+
+    <article class="pillar-card">
+      <div class="pillar-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3 class="pillar-title">Education & Learning</h3>
+      <p class="pillar-desc">Tutoring, school supplies, and after-school learning centres ensure every child has the tools to succeed academically and develop lifelong skills.</p>
+    </article>
+
+    <article class="pillar-card">
+      <div class="pillar-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      </div>
+      <h3 class="pillar-title">Safe Shelter</h3>
+      <p class="pillar-desc">For children without secure housing, we provide safe, warm, and supervised residential facilities — a stable foundation from which they can face the world.</p>
+    </article>
+
+    <article class="pillar-card">
+      <div class="pillar-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#BE185D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="pillar-title">Community Care</h3>
+      <p class="pillar-desc">Children heal in community. Our social workers, counsellors, and volunteers build the human networks that surround each child with love and accountability.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== IMPACT BANNER ===== -->
+<section class="impact-banner" id="impact" aria-labelledby="impact-title">
+  <div class="impact-inner">
+    <div class="impact-text">
+      <p class="section-label">Our Impact</p>
+      <h2 class="section-title" id="impact-title">Measuring what matters most — children's futures</h2>
+      <p class="section-sub">Every donation, volunteer hour, and partnership translates directly into measurable change in the lives of real children in our community.</p>
+      <a href="#get-involved" class="btn-primary" style="margin-top:1rem; display:inline-flex;">Join Our Mission</a>
+    </div>
+    <div class="impact-metrics" aria-label="Impact statistics">
+      <div class="impact-metric">
+        <div class="impact-metric-num">94%</div>
+        <div class="impact-metric-label">School retention rate among our children</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-metric-num">860k</div>
+        <div class="impact-metric-label">Meals served in the last 12 months</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-metric-num">320</div>
+        <div class="impact-metric-label">Children housed this year</div>
+      </div>
+      <div class="impact-metric">
+        <div class="impact-metric-num">97¢</div>
+        <div class="impact-metric-label">Of every $1 goes directly to children</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section class="programs" id="programs" aria-labelledby="programs-title">
+  <p class="section-label">What We Run</p>
+  <h2 class="section-title" id="programs-title">Programmes built around real community needs</h2>
+  <p class="section-sub">Each programme was started because local families asked for it. We listen first, then build.</p>
+
+  <div class="programs-list">
+    <article class="program-item">
+      <div class="program-visual" aria-hidden="true">
+        <img src="pics/AOT1.jpg" alt="Daily Feeding Initiative — children enjoying a meal" />
+      </div>
+      <div class="program-body">
+        <span class="program-tag">Food Programme</span>
+        <h3 class="program-title">Daily Feeding Initiative</h3>
+        <p class="program-desc">Running across 12 community centres, our feeding programme ensures that no enrolled child starts a school day on an empty stomach. Nutritionists plan seasonal menus, and local farmers supply fresh produce — keeping money in the community while keeping children healthy.</p>
+        <a href="#get-involved" class="program-link" aria-label="Learn more about the Daily Feeding Initiative">
+          Learn more
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="program-item">
+      <div class="program-visual" aria-hidden="true">
+        <img src="pics/gojo.jpg" alt="After-School Learning Centres — children studying" />
+      </div>
+      <div class="program-body">
+        <span class="program-tag">Education</span>
+        <h3 class="program-title">After-School Learning Centres</h3>
+        <p class="program-desc">Seven days a week, our learning centres offer homework support, literacy coaching, STEM workshops, and creative arts. Qualified teachers and trained volunteers give children the attention their classrooms often can't. Over 80% of our learners improve by at least one grade level within six months.</p>
+        <a href="#get-involved" class="program-link" aria-label="Learn more about After-School Learning Centres">
+          Learn more
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="program-item">
+      <div class="program-visual" aria-hidden="true">
+        <img src="pics/KAKAROT.jpg" alt="Safe House Network — a safe home for children" />
+      </div>
+      <div class="program-body">
+        <span class="program-tag">Shelter</span>
+        <h3 class="program-title">Safe House Network</h3>
+        <p class="program-desc">Children who are homeless, displaced, or escaping unsafe homes are welcomed into our Safe House Network — supervised residential spaces with structured routines, counselling, and a genuine sense of belonging. We work closely with families and social services to find permanent solutions.</p>
+        <a href="#get-involved" class="program-link" aria-label="Learn more about the Safe House Network">
+          Learn more
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== STORIES ===== -->
+<section class="stories" id="stories" aria-labelledby="stories-title">
+  <p class="section-label">Voices From the Community</p>
+  <h2 class="section-title" id="stories-title">The people behind the numbers</h2>
+  <p class="section-sub">Impact is best understood through human stories. Here is what community members say.</p>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <p class="story-quote">My son used to come home hungry every day. Since BrightRoots opened their centre near us, he eats well, does his homework with help, and his confidence has completely changed.</p>
+      <div class="story-author">
+        <div class="story-avatar" aria-hidden="true">A</div>
+        <div>
+          <div class="story-name">Amara K.</div>
+          <div class="story-role">Parent, Westside Community</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <p class="story-quote">I had nowhere to go. The safe house gave me my own bed, people who checked on me, and a tutor who believed I could pass my exams. I did — all of them.</p>
+      <div class="story-author">
+        <div class="story-avatar" aria-hidden="true">D</div>
+        <div>
+          <div class="story-name">David M., age 16</div>
+          <div class="story-role">Programme participant</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <p class="story-quote">Volunteering here is the most meaningful thing I do each week. These children are brilliant — they just need consistent support. BrightRoots provides exactly that structure.</p>
+      <div class="story-author">
+        <div class="story-avatar" aria-hidden="true">F</div>
+        <div>
+          <div class="story-name">Fatima N.</div>
+          <div class="story-role">Weekly volunteer, 3 years</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== GET INVOLVED ===== -->
+<section class="get-involved" id="get-involved" aria-labelledby="involved-title">
+  <p class="section-label">Get Involved</p>
+  <h2 class="section-title" id="involved-title">There are many ways to make a difference</h2>
+  <p class="section-sub">Whether you give time, talent, or treasure — every contribution directly changes a child's story.</p>
+
+  <div class="involved-grid">
+    <article class="involved-card featured">
+      <div class="involved-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <h3 class="involved-title">Make a Donation</h3>
+      <p class="involved-desc">KES 500 feeds a child for a week. KES 2,000 covers a month of school supplies. Every amount counts and goes directly to children.</p>
+      <a href="#donate" class="btn-small btn-small-green">Donate Now</a>
+    </article>
+
+    <article class="involved-card">
+      <div class="involved-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="involved-title">Volunteer With Us</h3>
+      <p class="involved-desc">Tutors, cooks, counsellors, drivers — we need skilled and willing hands. Join our volunteer network and give a few hours a week.</p>
+      <a href="volunteer.html" class="btn-small btn-small-outline">Apply to Volunteer</a>
+    </article>
+
+    <article class="involved-card">
+      <div class="involved-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3 class="involved-title">Corporate Partnerships</h3>
+      <p class="involved-desc">Sponsor a feeding programme, fund a learning centre, or run a staff volunteering day. We tailor partnerships around your organisation's values and capacity.</p>
+      <a href="partnership.html" class="btn-small btn-small-outline">Partner With Us</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== DONATE ===== -->
+<section class="donate-section" id="donate" aria-labelledby="donate-title">
+  <div class="donate-inner">
+    <h2 class="donate-title" id="donate-title">Choose a child's brighter future today</h2>
+    <p class="donate-sub">Secure, transparent, and accountable. You'll receive a full report on how your donation was used within 30 days.</p>
+    <div class="donate-amounts" role="group" aria-label="Suggested donation amounts">
+      <button class="amount-btn" type="button">KES 500</button>
+      <button class="amount-btn active" type="button">KES 1,000</button>
+      <button class="amount-btn" type="button">KES 2,500</button>
+      <button class="amount-btn" type="button">KES 5,000</button>
+      <button class="amount-btn" type="button">Other</button>
+    </div>
+    <div class="donate-btn-wrap">
+      <a href="donation.html" class="btn-primary" style="font-size:1.05rem; padding: 0.9rem 2.5rem;">
+        Give KES 1,000 Now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" aria-label="BrightRoots home">
+        <img src="pics/log2.png" alt="mkonowatabasamu" style="height: 72px; width: auto;">
+        <span class="nav-logo-text">Mkono wa <span>Tabasamu</span></span>
+      </a>
+      <p class="footer-tagline">Nourishing children, building community — since 2016. Registered non-profit organisation. Nairobi, Kenya.</p>
+      <div class="footer-social" aria-label="Social media links">
+        <a href="#" class="social-icon" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Twitter / X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.7)" aria-hidden="true"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="rgba(255,255,255,0.7)"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>What We Do</h4>
+      <ul>
+        <li><a href="#pillars">Food & Nutrition</a></li>
+        <li><a href="#pillars">Education</a></li>
+        <li><a href="#pillars">Safe Shelter</a></li>
+        <li><a href="#pillars">Community Care</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Get Involved</h4>
+      <ul>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#get-involved">Volunteer</a></li>
+        <li><a href="#get-involved">Partner With Us</a></li>
+        <li><a href="#">Events</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organisation</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#impact">Annual Report</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Mkono Wa Tabasamu. All rights reserved.</span>
+    <div style="display:flex; gap:1.5rem;">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Control video playback speed (0.5x)
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.hero-video');
+    if (video) {
+      video.playbackRate = 0.5;
+      // Ensure video plays even if autoplay is blocked
+      video.play().catch(function(error) {
+        console.log('Video autoplay was prevented. User interaction required.');
+      });
+    }
+  });
+
+  // Donation amount buttons
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const val = btn.textContent.trim();
+      const donateBtn = document.querySelector('.donate-btn-wrap .btn-primary');
+      if (val !== 'Other') donateBtn.textContent = '';
+      if (val !== 'Other') {
+        donateBtn.innerHTML = `Give ${val} Now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      } else {
+        donateBtn.innerHTML = `Choose Your Amount <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      }
+    });
+  });
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar-card, .program-item, .story-card, .involved-card, .impact-metric').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Hamburger (mobile)
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!open));
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '64px';
+    navLinks.style.left = '0'; navLinks.style.right = '0';
+    navLinks.style.background = 'rgba(27,67,50,0.98)';
+    navLinks.style.padding = '1.5rem 2rem';
+    navLinks.style.gap = '1.2rem';
+  });
+</script>
+</body>
+</html>

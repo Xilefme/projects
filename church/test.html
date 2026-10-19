@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(to bottom right, #4361ee, #3a0ca3);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .right-panel {
+            flex: 1.2;
+            padding: 40px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .illustration {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .features {
+            list-style: none;
+            margin-top: 30px;
+        }
+        
+        .features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+        
+        .amount-input {
+            position: relative;
+        }
+        
+        .amount-input span {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #718096;
+        }
+        
+        .amount-input input {
+            padding-left: 30px;
+        }
+        
+        .card-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .card-group .form-group {
+            flex: 1;
+        }
+        
+        .security-note {
+            display: flex;
+            align-items: center;
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #4a5568;
+        }
+        
+        .security-note i {
+            color: #38a169;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 16px;
+            background: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #3a0ca3;
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .payment-method {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            width: 60px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .disclaimer {
+            text-align: center;
+            margin-top: 20px;
+            color: #718096;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo">PaySecure</div>
+            <h2>Secure Payment Processing</h2>
+            <div class="illustration">
+                <i class="fas fa-lock" style="font-size: 64px;"></i>
+            </div>
+            <ul class="features">
+                <li><i class="fas fa-shield-alt"></i> Bank-level security</li>
+                <li><i class="fas fa-globe"></i> Worldwide acceptance</li>
+                <li><i class="fas fa-clock"></i> Instant processing</li>
+                <li><i class="fas fa-headset"></i> 24/7 Support</li>
+            </ul>
+        </div>
+        
+        <div class="right-panel">
+            <h1>Payment Details</h1>
+            <p class="subtitle">Enter your payment information securely</p>
+            
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="amount">Payment Amount</label>
+                    <div class="amount-input">
+                        <span>$</span>
+                        <input type="number" id="amount" placeholder="0.00" min="1" step="0.01" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Cardholder Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card">Card Number</label>
+                    <input type="text" id="card" placeholder="1234 5678 9012 3456" required>
+                </div>
+                
+                <div class="card-group">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john.doe@example.com" required>
+                </div>
+                
+                <div class="security-note">
+                    <i class="fas fa-lock"></i>
+                    <span>Your payment details are encrypted and secure</span>
+                </div>
+                
+                <button type="submit">Pay Now</button>
+            </form>
+            
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fab fa-cc-visa" style="color: #1a1f71;"></i>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-cc-mastercard" style="color: #eb001b;"></i>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-cc-amex" style="color: #006fcf;"></i>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-cc-discover" style="color: #ff6000;"></i>
+                </div>
+            </div>
+            
+            <p class="disclaimer">By proceeding, you agree to our Terms of Service and Privacy Policy</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const amount = document.getElementById('amount').value;
+            const name = document.getElementById('name').value;
+            const card = document.getElementById('card').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+            const email = document.getElementById('email').value;
+            
+            // Simple validation
+            if (!amount || amount < 1) {
+                alert('Please enter a valid amount (at least $1)');
+                return;
+            }
+            
+            if (!name) {
+                alert('Please enter cardholder name');
+                return;
+            }
+            
+            if (!card || card.replace(/\s/g, '').length !== 16) {
+                alert('Please enter a valid 16-digit card number');
+                return;
+            }
+            
+            if (!expiry || !expiry.includes('/')) {
+                alert('Please enter expiry date in MM/YY format');
+                return;
+            }
+            
+            if (!cvv || cvv.length !== 3) {
+                alert('Please enter a valid 3-digit CVV');
+                return;
+            }
+            
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // In a real implementation, you would send this data to your server
+            // For now, we'll just show a success message
+            alert(`Payment processing for $${amount}!\n\nThis is a demo. In a real application, this would connect to a payment processor.`);
+        });
+        
+        // Format card number with spaces
+        document.getElementById('card').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formatted = '';
+            
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += value[i];
+            }
+            
+            e.target.value = formatted;
+        });
+        
+        // Format expiry date
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

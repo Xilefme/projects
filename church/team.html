@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | Bible Training Ministry</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Shared Styles with Homepage */
+        :root {
+            --primary: #1a3e72;
+            --secondary: #e9b949;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            color: var(--dark);
+            background-color: white;
+            line-height: 1.6;
+        }
+        
+        /* Side Navigation (Same as Homepage) */
+        .sidebar {
+            width: 220px;
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+        
+        .nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            border-left: 3px solid var(--secondary);
+            padding-left: 10px;
+        }
+        
+        .footer {
+            margin-top: auto;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: 220px;
+        }
+        
+        section {
+            padding: 80px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Team Specific Styles */
+        .team-hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+        
+        .team-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin-top: 15px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--secondary);
+        }
+        
+        .member-name {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+        
+        .member-title {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .member-bio {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .member-credentials {
+            font-size: 0.8rem;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+            }
+            
+            .nav-links {
+                display: flex;
+                gap: 15px;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .nav-links li {
+                margin-bottom: 0;
+            }
+            
+            .nav-links a.active {
+                border-left: none;
+                border-bottom: 3px solid var(--secondary);
+                padding-left: 0;
+                padding-bottom: 5px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+            
+            .team-hero {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Navigation -->
+    <nav class="sidebar">
+        <div class="logo"><span>KATECHEO</span> BIBLE TRAINING</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="team.html" class="active">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+       <div class="footer">
+            <p>Follow us on other media</p>
+             <div class="social-links">
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Team Hero Section -->
+        <section class="team-hero">
+            <h1>Meet Our Leadership Team</h1>
+            <p>Experienced theologians and ministry leaders dedicated to biblical training</p>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="team">
+            <h2 class="section-title">Our Core Team</h2>
+            <p>Our leadership brings together decades of ministry experience and academic excellence in biblical studies.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="pics/GOJO2.jpg" alt="Preacher" class="member-photo">
+                    <h3 class="member-name">Preacher</h3>
+                    <p class="member-title">Founder & Executive Director</p>
+                    <p class="member-bio">With over 25 years of pastoral experience and a Th.D. in New Testament Studies, Dr. Wilson oversees our global training initiatives.</p>
+                    <p class="member-credentials">Th.D., Dallas Theological Seminary</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="pics/naruto.jpg" alt="Rev. Teach" class="member-photo">
+                    <h3 class="member-name">Rev. Teach</h3>
+                    <p class="member-title">Director of Training</p>
+                    <p class="member-bio">Ordained minister with 15 years experience in cross-cultural ministry and curriculum development.</p>
+                    <p class="member-credentials">M.Div., Gordon-Conwell Theological Seminary</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="pics/KAKAROT.jpg" alt="Dr. Doffy" class="member-photo">
+                    <h3 class="member-name">Dr. Doffy</h3>
+                    <p class="member-title">Africa Regional Director</p>
+                    <p class="member-bio">Nigerian-born pastor and theologian who has planted 12 churches across West Africa.</p>
+                    <p class="member-credentials">Ph.D., Africa International University</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advisory Board -->
+        <section class="team" style="background-color: var(--light);">
+            <h2 class="section-title">Advisory Board</h2>
+            <p>Our distinguished advisors provide theological oversight and strategic guidance.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="pics/KAKAROT.jpg" alt="Kiptoo" class="member-photo">
+                    <h3 class="member-name">Kiptoo</h3>
+                    <p class="member-title">Theological Advisor</p>
+                    <p class="member-bio">Professor Emeritus of Systematic Theology at Trinity Evangelical Divinity School.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="pics/gojo.jpg" alt="Dr.Teach" class="member-photo">
+                    <h3 class="member-name">Teach</h3>
+                    <p class="member-title">Academic Advisor</p>
+                    <p class="member-bio">Specialist in biblical hermeneutics and author of several study Bibles.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple navigation active state
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.querySelectorAll('.nav-links a').forEach(l => {
+                    l.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

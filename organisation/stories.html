@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Impact | Helping Children Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+
+        .site-header {
+position: absolute;
+top: 0;
+width: 100%;
+z-index: 1000;
+padding: 1rem 0;
+}
+
+.hd-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: #FF5722;
+}
+
+.donate-btn {
+  background: #FF5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.donate-btn:hover {
+  background: red;
+  transform: translateY(-2px);
+}
+        :root {
+            --primary-color: #FF5722;
+            --secondary-color: #FF9800;
+            --dark-color: #2d3436;
+            --light-color: #f7f7f7;
+            --accent-color: #FF9800;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background-color: #FF5722;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #FF9800;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 100%;
+            padding: 20px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+        }
+        
+        .gallery-caption h3 {
+            margin-bottom: 5px;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .video-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .youtube-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            font-size: 80px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: rgba(78, 205, 196, 0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Donation CTA Section */
+        .donation-section {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+        
+        .donation-section .section-title {
+            color: white;
+        }
+        
+        .donation-section .section-title:after {
+            background: white;
+        }
+        
+        .donation-content {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            height: 20px;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 600px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: white;
+            width: 65%;
+            border-radius: 10px;
+            position: relative;
+            transition: width 1s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 10px auto 30px;
+            color: white;
+        }
+        
+        .social-share {
+            margin-top: 30px;
+        }
+        
+        .social-share a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            line-height: 40px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-share a:hover {
+            transform: translateY(-3px);
+            background: var(--dark-color);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal for Image Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 50px;
+        }
+        
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Additional responsive fixes */
+        @media (max-width: 768px) {
+            .hd-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .donate-btn {
+                margin: 0 auto;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            .video-container {
+                grid-template-columns: 1fr;
+            }
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <header class="site-header">
+  <div class="hd-container">
+    <a href="#" class="logo">
+      <img src="pics/logo.png" alt="Hope for Children Logo" width="150">
+    </a>
+    
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Donate Button -->
+    <button class="donate-btn" onclick="document.location='donate.html'">Donate Now</button>
+  </div>
+</header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Background video teaser (autoplay muted loop) -->
+        <video class="hero-video" autoplay muted loop>
+            <source src="https://www.example.com/path-to-teaser-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="hero-content">
+            <div class="container">
+                <h1>Bringing Hope – One Place At A Time</h1>
+                <p>Every child deserves hope. See how your support changes lives through our work with vulnerable children around the world.</p>
+                <a href="#donate" class="btn">Donate Now</a>
+                <a href="#stories" class="btn btn-secondary">Watch Our Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Moments of Joy</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">These precious moments are made possible by the generosity of people like you. Each smile represents a life changed through education, healthcare, and loving care.</p>
+            
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item" onclick="openModal('pics/AOT1.jpg', 'Little Sarah’s first day at school – thanks to your donations! Sarah had never been to school before we helped her family with education support.')">
+                    <img src="pics/AOT1.jpg" alt="Happy child at school" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>First Day at School</h3>
+                        <p>Sarah's journey begins</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item" onclick="openModal('pics/AOT2.jpg', 'Community health camp: Over 200 children vaccinated this year. Our mobile clinics reach remote areas where healthcare is inaccessible.')">
+                    <img src="pics/AOT2.jpg" alt="Child receiving vaccination" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Health Camp</h3>
+                        <p>200+ children vaccinated</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item" onclick="openModal('pics/gojo.jpg', 'Community health camp: Over 200 children vaccinated this year. Our mobile clinics reach remote areas where healthcare is inaccessible.')">
+                    <img src="pics/gojo.jpg" alt="Child receiving vaccination" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Health Camp</h3>
+                        <p>200+ children vaccinated</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" onclick="openModal('pics/GOJO2.jpg', 'Nutrition program: Over 1,000 meals served weekly to malnourished children. Proper nutrition in early years prevents lifelong health issues.')">
+                    <img src="pics/GOJO2.jpg" alt="Child eating meal" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Nutrition Program</h3>
+                        <p>1,000+ meals weekly</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item" onclick="openModal('pics/naruto.jpg', 'Education initiative: 75 children received scholarships this year. Education breaks the cycle of poverty for entire families.')">
+                    <img src="pics/naruto.jpg" alt="Children in classroom" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Education Initiative</h3>
+                        <p>75 scholarships awarded</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" onclick="openModal('pics/KAKAROT.jpg', 'Education initiative: 75 children received scholarships this year. Education breaks the cycle of poverty for entire families.')">
+                    <img src="pics/KAKAROT.jpg" alt="Children in classroom" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Education Initiative</h3>
+                        <p>75 scholarships awarded</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="stories">
+        <div class="container">
+            <h2 class="section-title">Stories of Hope</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Watch these inspiring stories to see the real impact of your support. Each video represents lives transformed through compassion and action.</p>
+            
+            <div class="video-container">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <!-- PRO TIP: Replace with your actual YouTube embed code -->
+                        <iframe src="https://www.youtube.com/watch?v=27tXqfc3vpY&list=RDMM27tXqfc3vpY&start_radio=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>A Day in the Life – How Your Support Helps</h3>
+                        <p>Follow 8-year-old Amina through her day at our children's center where she receives education, meals, and medical care.</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">Watch Full Story</a>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <!-- PRO TIP: Replace with your actual YouTube embed code -->
+                        <iframe src="https://www.youtube.com/watch?v=27tXqfc3vpY&list=RDMM27tXqfc3vpY&start_radio=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Success Story: From Struggling to Thriving</h3>
+                        <p>Meet Jamal, who went from living on the streets to graduating top of his class with our support.</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">Watch Full Story</a>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <!-- PRO TIP: Replace with your actual YouTube embed code -->
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/_jW0WrjwiVI?si=0DEBWc7L6jzt4rvR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>2023 Impact Report – By the Numbers</h3>
+                        <p>See the measurable difference we've made together this year through key statistics and stories.</p>
+                        <a href="#" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">Watch Full Story</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- YouTube CTA -->
+            <div class="youtube-cta">
+                <p style="margin-bottom: 15px;">Want to see more inspiring stories?</p>
+                <a href="https://youtube.com/yourchannel" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-youtube"></i> Subscribe to Our YouTube
+                </a>
+                <p style="margin-top: 15px; font-size: 0.9rem;">Every view helps raise awareness for our cause!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Voices of Impact</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Hear directly from the children, families, and partners whose lives have been touched by our work.</p>
+            
+            <div class="testimonials-container">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Before this program, my children often went hungry. Now they eat nutritious meals every day and attend school regularly. I've even received training to start my own small business."</p>
+                    <div class="testimonial-author">
+                        <img src="pics/KAKAROT.jpg" alt="Maria K." class="author-img">
+                        <div class="author-info">
+                            <h4>Malia </h4>
+                            <p>Mother of three, program participant</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"I was living on the streets before I came to the center. The counselors helped me heal from trauma, and now I'm studying to become a nurse so I can help others too."</p>
+                    <div class="testimonial-author">
+                        <img src="pics/obanai.jpg" alt="David R." class="author-img">
+                        <div class="author-info">
+                            <h4>Simpson</h4>
+                            <p>Former street child, now in university</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"As a longtime donor, I've visited the projects and seen the incredible work firsthand. The transparency and measurable impact keep me supporting this organization year after year."</p>
+                    <div class="testimonial-author">
+                        <img src="pics/naruto.jpg" alt="Sarah J." class="author-img">
+                        <div class="author-info">
+                            <h4>Zenitsu</h4>
+                            <p>Donor since 2015</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation CTA Section -->
+    <section class="donation-section" id="donate">
+        <div class="container">
+            <h2 class="section-title">Join Our Mission</h2>
+            <div class="donation-content">
+                <p>You can help write the next success story. Your donation today will provide food, education, healthcare, and hope to children in desperate need.</p>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-labels">
+                <span>0</span>
+                <span>Our Goal: 500 Children</span>
+                <span>500</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 65%;">
+                    <span class="progress-text">325 Children Helped</span>
+                </div>
+            </div>
+            
+            <div>
+                <a href="/donate" class="btn">Donate Now</a>
+                <a href="/sponsor" class="btn btn-secondary">Sponsor a Child</a>
+            </div>
+            
+            <div class="social-share">
+                <p style="margin-bottom: 15px;">Help spread the word!</p>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/about">About Us</a>
+                <a href="/programs">Our Programs</a>
+                <a href="/impact">Impact</a>
+                <a href="/blog">Stories</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <p class="copyright">© 2023 Helping Children Organization. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        // Function to open modal with clicked image
+        function openModal(imgSrc, caption) {
+            document.getElementById('modalImage').src = imgSrc;
+            document.getElementById('modalCaption').innerHTML = caption;
+            document.getElementById('imageModal').style.display = "block";
+        }
+        
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+        }
+        
+        // Close modal when clicking outside image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // PRO TIP: YouTube API integration for tracking views
+        // This would require actual YouTube API implementation
+        // The code below is a placeholder for the concept
+        
+        // Track when videos are played
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframes = document.querySelectorAll('iframe');
+            
+            iframes.forEach(iframe => {
+                iframe.addEventListener('load', function() {
+                    // In a real implementation, you would use YouTube API
+                    // to track when videos are played
+                    console.log('Video loaded - implement YouTube API tracking here');
+                });
+            });
+        });
+        
+        // PRO TIP: Animate progress bar on scroll
+        window.addEventListener('scroll', function() {
+            const progressBar = document.querySelector('.progress-bar');
+            const donationSection = document.querySelector('.donation-section');
+            const sectionPosition = donationSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if(sectionPosition < screenPosition) {
+                progressBar.style.width = '65%';
+            }
+        });
+    </script>
+</body>
+</html>

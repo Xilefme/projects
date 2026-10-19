@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | Helping Hands</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== ENHANCED TEAM GRID ===== */
+        
+
+              .team-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .team-social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4CAF50;
+            transition: all 0.3s;
+        }
+
+        .team-social-links a:hover {
+            background: #4CAF50;
+            color: white;
+            transform: translateY(-3px);
+        }
+       
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .member-card:hover .member-photo {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .member-photo {
+                height: 300px;
+            }
+            
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+  <div class="container">
+    <a href="#" class="logo">
+      <img src="pics/logo.png" alt="Hope for Children Logo" width="150">
+    </a>
+    
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Donate Button -->
+    <button class="donate-btn" onclick="document.location='donate.html'">Donate Now</button>
+  </div>
+</header>
+
+    <section class="team-section">
+        <div class="section-header">
+            <h2>Meet Our Changemakers</h2>
+            <p>The passionate individuals who turn your donations into life-changing impact every day</p>
+        </div>
+
+        <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="member-card">
+                <div class="member-photo" style="background-image: url('pics/gojo.jpg');">
+                </div>
+                <div class="member-info">
+                    <h3>Pst. Abraham Obonyo</h3>
+                    <span class="role-tag">Founder</span>
+                    <p class="member-bio">
+                        The board director and founder of Smiley Hand organisation who shared his vision to the rest of his trusted team members to build a future for the kids.
+                    </p>
+                    
+                    <div class="impact-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">17</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">Patients</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fas fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="member-card">
+                <div class="member-photo" style="background-image: url('pics/KAKAROT.jpg');">
+                </div>
+                <div class="member-info">
+                    <h3>Felo</h3>
+                    <span class="role-tag">CO-Founder</span>
+                    <p class="member-bio">
+                        The right hand man of the founder who was there at the start of this long journeyed vision and also the scientist behind every technical involved.
+                    </p>
+                    
+                    <div class="impact-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Villages</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">Team</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fas fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+
+             <div class="member-card">
+                <div class="member-photo" style="background-image: url('pics/obanai.jpg');">
+                </div>
+                <div class="member-info">
+                    <h3>Sarah</h3>
+                    <span class="role-tag">Field Coordinator</span>
+                    <p class="member-bio">
+                        The founder's wife and the medical team director with experience of over 10yrs in the field of medicine who handles all mdical problems while on the field.
+                    </p>
+                    
+                    <div class="impact-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Villages</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">Team</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="#"><i class="fas fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Add more team members following the same structure -->
+        </div>
+    </section>
+
+      <footer class="site-footer">
+  <div class="container">
+    <!-- Logo and Mission -->
+    <div class="footer-col">
+      <img src="pics/logo.png" alt="Logo" width="120">
+      <p>Empowering children to build brighter futures since 2010.</p>
+    </div>
+    
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="stories.html">Success Stories</a></li>
+      </ul>
+    </div>
+    
+    <!-- Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li>Nairobi, Kasarani</li>
+        <li>Email: website@gmail.com</li>
+        <li>Phone: +254 745 678 190</li>
+      </ul>
+    </div>
+    
+    <!-- Social Media -->
+    <div class="social-links" style="margin: 20px 0;">
+        <p>Other Links</p>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+            </div>
+  </div>
+  
+  <!-- Copyright -->
+  <div class="copyright">
+    <p>&copy; 2025 Hope for Children </p>
+    <p>|All rights reserved | Design by Xilef|</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

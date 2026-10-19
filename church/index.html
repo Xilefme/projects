@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Training Ministry | Equipping Leaders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Minimal Base Styles */
+        :root {
+            --primary: #1a3e72;
+            --secondary: #e9b949;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            color: var(--dark);
+            background-color: white;
+            line-height: 1.6;
+        }
+        
+        /* Side Navigation */
+        .sidebar {
+            width: 220px;
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            list-style: none;
+            flex-grow: 1;
+        }
+        
+        .nav-links li {
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+        }
+        
+        .nav-links a.active {
+            border-left: 3px solid var(--secondary);
+            padding-left: 10px;
+        }
+        
+        .footer {
+            margin-top: auto;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: 220px;
+        }
+        
+        section {
+            padding: 80px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #dba53b;
+            transform: translateY(-2px);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin-top: 15px;
+        }
+        
+        .about p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        /* Video Section */
+        .videos {
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #ddd;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        .video-info h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Donation Motivation */
+        .donation-motivation {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .donation-motivation .section-title {
+            color: white;
+        }
+        
+        .donation-motivation .section-title:after {
+            background-color: var(--secondary);
+        }
+        
+        .donation-motivation p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+        }
+        
+        .impact-points {
+            margin: 40px 0;
+        }
+        
+        .impact-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .impact-icon {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(26, 62, 114, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+            }
+            
+            .nav-links {
+                display: flex;
+                gap: 15px;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .nav-links li {
+                margin-bottom: 0;
+            }
+            
+            .nav-links a.active {
+                border-left: none;
+                border-bottom: 3px solid var(--secondary);
+                padding-left: 0;
+                padding-bottom: 5px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+            
+            .hero {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Navigation -->
+    <nav class="sidebar">
+        <div class="logo"><span>KATECHEO</span> BIBLE TRAINING</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="footer">
+            <p>Follow us on other media</p>
+             <div class="social-links">
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Transforming Lives Through Biblical Training</h1>
+            <p>Your support helps equip pastors and Christian leaders with deep biblical knowledge and practical ministry skills.</p>
+            <a href="donate.html" class="btn">Support Our Mission</a>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <h2 class="section-title">Our Mission</h2>
+            <p>We are a non-profit ministry dedicated to providing high-quality biblical education to Christian leaders in developing nations where formal theological training is scarce or unaffordable.</p>
+            <p>Since our founding in 2015, we've trained pastors, helping them to faithfully teach God's Word and shepherd their congregations.</p>
+            <a href="donate.html" class="btn">Donate Now</a>
+        </section>
+
+        <!-- Video Section -->
+        <section class="videos">
+            <h2 class="section-title">Our Training in Action</h2>
+            <p>See how your support makes a difference in the lives of pastors and their communities.</p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bible Study">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Pastoral Training in Kenya</h3>
+                        <p>How we equip rural pastors with biblical interpretation skills</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Classroom">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Student Testimonies</h3>
+                        <p>Hear how our training transformed these pastors' ministries</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mission">
+                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>2023 Mission Highlights</h3>
+                        <p>A year of impact through your generous support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Motivation -->
+        <section class="donation-motivation" id="donate">
+            <h2 class="section-title">Why Your Gift Matters</h2>
+            <p>Every donation directly supports our mission to train biblical leaders who will faithfully teach God's Word to their communities.</p>
+            
+            <div class="impact-points">
+                <div class="impact-point">
+                    <div class="impact-icon"><i class="fas fa-hands-helping"></i></div>
+                    <div>
+                        <h3>Multiply Your Impact</h3>
+                        <p>Each trained pastor influences hundreds of believers throughout their ministry.</p>
+                    </div>
+                </div>
+                
+                <div class="impact-point">
+                    <div class="impact-icon"><i class="fas fa-bible"></i></div>
+                    <div>
+                        <h3>Preserve Sound Doctrine</h3>
+                        <p>Your support helps prevent false teaching by equipping leaders with proper biblical interpretation.</p>
+                    </div>
+                </div>
+                
+                <div class="impact-point">
+                    <div class="impact-icon"><i class="fas fa-globe-africa"></i></div>
+                    <div>
+                        <h3>Reach the Underserved</h3>
+                        <p>We focus on regions where formal theological education is inaccessible.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="btn">Make a Donation Today</a>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <h2 class="section-title">Changed Lives</h2>
+            <p>Hear from those impacted by our ministry and the generosity of donors like you.</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The training I received completely transformed my preaching. I now understand how to properly study and teach God's Word to my congregation.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="pics/GOJO1.jpg" alt="Pastor John" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Pastor John M.</h4>
+                            <p>Uganda</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>As a donor, I love receiving updates showing exactly how my gifts are being used to train pastors. It's the most rewarding giving I do.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="pics/obanai.jpg" alt="Sarah T." class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah T.</h4>
+                            <p>Monthly Donor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Before this training, I was just repeating what I heard others say. Now I can study the Bible for myself and teach with confidence.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="pics/KAKAROT.jpg" alt="Pastor Samuel" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Pastor Attirah</h4>
+                            <p>Kenya</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple navigation active state
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.querySelectorAll('.nav-links a').forEach(l => {
+                    l.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Video placeholder interaction
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // In a real implementation, this would open a modal with the video
+                alert('Video player would open here');
+            });
+        });
+    </script>
+</body>
+</html>

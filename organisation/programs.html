@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Programs | Hope for Children</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS will go here */
+    /* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Transparent Background Image */
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('pics/uzumaki.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3; /* Adjust transparency here */
+  z-index: -1;
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+}
+
+.what-we-do {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  margin: 0;
+  background: linear-gradient(45deg,  #FF5722, #FF9800);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.underline {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg,  #FF5722, #FF9800);
+  margin: 0 auto;
+}
+
+/* Program Cards */
+.programs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.program-card {
+  display: flex;
+  min-height: 80vh;
+  margin-bottom: 4rem;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Donation Section Styles */
+.donation-section {
+  margin-top: 2rem;
+  border-top: 1px dashed  #FF5722;
+  padding-top: 1.5rem;
+}
+
+.donate-btn {
+  background: linear-gradient(45deg,  #FF5722, #FF9800);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 1rem 0;
+}
+
+.donate-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.donation-goal {
+  color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.donation-goal strong {
+  color: #e74c3c;
+  font-size: 1.1rem;
+}
+
+.impact-badge {
+  background: rgba(107, 191, 89, 0.1);
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.program-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-image {
+  flex: 1;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.card-content {
+  flex: 1;
+  padding: 0 4rem;
+}
+
+.card-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2c3e50;
+}
+
+/* Alternate card layout */
+.program-card:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Impact Grid Section */
+.impact-grid-section {
+  padding: 4rem 2rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg,  #FF5722, #FF9800);
+  bottom: -10px;
+  left: 25%;
+}
+
+/* Image Grid Layout */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.impact-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  aspect-ratio: 4/3; /* Fixed image proportions */
+}
+
+.impact-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Hover Effects */
+.caption-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(200, 115, 45, 0.875);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.impact-caption {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: bottom 0.3s ease;
+  z-index: 2;
+}
+
+.impact-item:hover .caption-overlay {
+  opacity: 1;
+}
+
+.impact-item:hover .impact-caption {
+  bottom: 0;
+}
+
+.impact-item:hover img {
+  transform: scale(1.05);
+}
+
+.cta-wrapper {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.see-more-btn {
+  background: linear-gradient(45deg,  #FF5722, #FF9800);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: inline-block;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.see-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .program-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .program-card:nth-child(even) {
+    flex-direction: column;
+  }
+  
+  .card-image {
+    width: 100%;
+    min-height: 300px;
+  }
+  
+  .card-content {
+    padding: 2rem 0;
+  }
+  
+  .what-we-do {
+    font-size: 3rem;
+  }
+
+  .donation-section {
+    text-align: center;
+  }
+
+  .donate-btn {
+    margin: 1rem auto;
+  }
+}
+
+/* Header/Footer responsive fix */
+@media (max-width: 768px) {
+  .container, .hd-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .footer-col {
+    text-align: center;
+  }
+  .footer-col ul {
+    text-align: center;
+  }
+}
+  </style>
+</head>
+<body>
+  
+  <header class="site-header">
+  <div class="container">
+    <a href="#" class="logo">
+      <img src="pics/logo.png" alt="Hope for Children Logo" width="150">
+    </a>
+    
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Donate Button -->
+    <button class="donate-btn" onclick="document.location='donate.html'">Donate Now</button>
+  </div>
+</header>
+  <!-- Transparent Background Image -->
+  <div class="background-image"></div>
+
+  <!-- Content Wrapper -->
+  <main>
+    <!-- Styled Header -->
+    <section class="header-section">
+      <h1 class="what-we-do">What We Do</h1>
+      <div class="underline"></div>
+    </section>
+
+    <!-- Program Cards -->
+    <section class="programs-container">
+      <!-- Card 1 -->
+      <div class="program-card">
+        <div class="card-image" style="background-image: url('pics/AOT2.jpg');"></div>
+        <div class="card-content">
+          <h2>Education Initiative</h2>
+          <p>We provide school supplies and tutoring to 1,200 children annually. Education breaks the cycle of poverty by empowering kids with knowledge and skills.</p>
+        </div>
+
+         <div class="donation-section">
+      <p class="donation-goal"><strong>$25</strong> sponsors one child for a month</p>
+      <button class="donate-btn" data-program="education">Donate Now</button>
+      <div class="impact-badge">
+        <span>📚 1,200 children helped in 2023</span>
+      </div>
+    </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="program-card">
+        <div class="card-image" style="background-image: url('pics/gojo.jpg');"></div>
+        <div class="card-content">
+          <h2>Nutrition Program</h2>
+          <p>Daily nutritious meals for 500+ children. Proper nutrition is essential for physical growth and cognitive development in young learners.</p>
+        </div>
+
+            <div class="donation-section">
+      <p class="donation-goal"><strong>$25</strong> sponsors one child for a month</p>
+      <button class="donate-btn" data-program="education">Donate Now</button>
+      <div class="impact-badge">
+        <span>📚 1,200 children helped in 2023</span>
+      </div>
+    </div>
+      </div>
+
+          <!-- Program Cards -->
+    <section class="programs-container">
+      <!-- Card 1 -->
+      <div class="program-card">
+        <div class="card-image" style="background-image: url('pics/KAKAROT.jpg');"></div>
+        <div class="card-content">
+          <h2>Education Initiative</h2>
+          <p>We provide school supplies and tutoring to 1,200 children annually. Education breaks the cycle of poverty by empowering kids with knowledge and skills.</p>
+        </div>
+
+         <div class="donation-section">
+      <p class="donation-goal"><strong>$25</strong> sponsors one child for a month</p>
+      <button class="donate-btn" data-program="education">Donate Now</button>
+      <div class="impact-badge">
+        <span>📚 1,200 children helped in 2023</span>
+      </div>
+    </div>
+      </div>
+
+      <div class="program-card">
+        <div class="card-image" style="background-image: url('pics/obanai.jpg');"></div>
+        <div class="card-content">
+          <h2>Nutrition Program</h2>
+          <p>Daily nutritious meals for 500+ children. Proper nutrition is essential for physical growth and cognitive development in young learners.</p>
+        </div>
+
+            <div class="donation-section">
+      <p class="donation-goal"><strong>$25</strong> sponsors one child for a month</p>
+      <button class="donate-btn" data-program="education">Donate Now</button>
+      <div class="impact-badge">
+        <span>📚 1,200 children helped in 2023</span>
+      </div>
+    </div>
+      </div>
+
+      <!-- Add 2 more cards following the same structure -->
+    </section>
+
+        <section class="impact-grid-section">
+  <h2 class="section-title">Our Impact in Action</h2>
+  <div class="impact-grid">
+    <!-- Image 1 -->
+    <div class="impact-item">
+      <img src="pics/AOT1.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="impact-item">
+      <img src="pics/GOJO2.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="impact-item">
+      <img src="pics/naruto.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="impact-item">
+      <img src="pics/Sasuke.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="impact-item">
+      <img src="pics/GOJO2.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="impact-item">
+      <img src="pics/AOT2.jpg" 
+           alt="Children reading books" 
+           data-caption="1,200+ school kits distributed in 2023">
+      <div class="caption-overlay"></div>
+      <p class="impact-caption">1,200+ school kits distributed</p>
+    </div>
+
+     <div class="cta-wrapper">
+    <button id="loadMoreBtn" class="see-more-btn" onclick="document.location='stories.html'" >See More Impact</button>
+  </div>
+    
+    <!-- Repeat for 5-7 more images (ideal grid size) -->
+  </div>
+</section>
+    
+  </main>
+ <footer class="site-footer">
+  <div class="container">
+    <!-- Logo and Mission -->
+    <div class="footer-col">
+      <img src="pics/logo.png" alt="Logo" width="120">
+      <p>Empowering children to build brighter futures since 2010.</p>
+    </div>
+    
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#stories">Success Stories</a></li>
+      </ul>
+    </div>
+    
+    <!-- Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li>Nairobi, Kasarani</li>
+        <li>Email: website@gmail.com</li>
+        <li>Phone: +254 745 678 190</li>
+      </ul>
+    </div>
+    
+    <!-- Social Media -->
+    <div class="social-links" style="margin: 20px 0;">
+        <p>Other Links</p>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+     </div>
+  </div>
+  
+  <!-- Copyright -->
+  <div class="copyright">
+    <p>&copy; 2025 Hope for Children </p>
+    <p>|All rights reserved | Design by Xilef|</p>
+  </div>
+</footer>
+
+  <script>
+    // JavaScript will go here
+    document.addEventListener('DOMContentLoaded', () => {
+  const programCards = document.querySelectorAll('.program-card');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  programCards.forEach(card => {
+    observer.observe(card);
+  });
+});
+
+// Animate grid items on scroll
+const impactItems = document.querySelectorAll('.impact-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+impactItems.forEach(item => {
+  item.style.opacity = 0;
+  item.style.transform = 'translateY(50px)';
+  item.style.transition = 'all 0.6s ease';
+  observer.observe(item);
+});
+
+// Optional: Lightbox for clicked images
+impactItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const imgSrc = item.querySelector('img').src;
+    const caption = item.querySelector('.impact-caption').textContent;
+    
+    // Create lightbox (or use a library like Lightbox.js)
+    const lightbox = document.createElement('div');
+    lightbox.innerHTML = `
+      <div class="lightbox-overlay">
+        <img src="${imgSrc}" alt="">
+        <p>${caption}</p>
+        <button class="close-lightbox">×</button>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+  });
+});
+  </script>
+</body>
+</html>
