@@ -6,7 +6,6 @@
     <title>Contact Us | Bible Training Ministry</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Shared Styles with Homepage */
         :root {
             --primary: #1a3e72;
             --secondary: #e9b949;
@@ -29,7 +28,6 @@
             line-height: 1.6;
         }
         
-        /* Side Navigation (Same as Homepage) */
         .sidebar {
             width: 220px;
             background-color: var(--primary);
@@ -86,7 +84,6 @@
             color: rgba(255,255,255,0.6);
         }
         
-        /* Main Content Area */
         .main-content {
             flex: 1;
             margin-left: 220px;
@@ -98,7 +95,6 @@
             margin: 0 auto;
         }
         
-        /* Contact Specific Styles */
         .contact-hero {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
@@ -200,7 +196,6 @@
             overflow: hidden;
         }
         
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -246,7 +241,6 @@
     </style>
 </head>
 <body>
-    <!-- Side Navigation -->
     <nav class="sidebar">
         <div class="logo"><span>KATECHEO</span> BIBLE TRAINING</div>
         <ul class="nav-links">
@@ -264,15 +258,12 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Contact Hero Section -->
         <section class="contact-hero">
             <h1>Get In Touch</h1>
             <p>We'd love to hear from you and answer any questions</p>
         </section>
 
-        <!-- Contact Content -->
         <section class="contact">
             <h2 class="section-title">Contact Our Ministry</h2>
             
@@ -292,7 +283,7 @@
                         <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                         <div>
                             <h4>Phone</h4>
-                            <p>+254 758 741 725</p>
+                            <p>+254 721 234 434</p>
                         </div>
                     </div>
                     
@@ -326,14 +317,12 @@
             </div>
             
             <div class="map-container">
-                <!-- In a real implementation, you would embed a Google Map here -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.715312490773!2d-80.84338892416436!3d35.22734037258496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8856a02efb000807%3A0xefb1b743d0a5eccc!2sBilly%20Graham%20Library!5e0!3m2!1sen!2sus!4v1689874679783!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
     </main>
 
     <script>
-        // Simple navigation active state
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 document.querySelectorAll('.nav-links a').forEach(l => {
@@ -343,7 +332,6 @@
             });
         });
         
-        // Form submission handling
         document.querySelector('.contact-form form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you for your message! We will respond soon.');
