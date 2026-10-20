@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* CSS will go here */
-    /* Base Styles */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -17,7 +15,6 @@ body {
   position: relative;
 }
 
-/* Transparent Background Image */
 .background-image {
   position: fixed;
   top: 0;
@@ -27,11 +24,10 @@ body {
   background-image: url('pics/uzumaki.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.3; /* Adjust transparency here */
+  opacity: 0.3; 
   z-index: -1;
 }
 
-/* Header Section */
 .header-section {
   text-align: center;
   padding: 6rem 2rem 4rem;
@@ -56,7 +52,6 @@ body {
   margin: 0 auto;
 }
 
-/* Program Cards */
 .programs-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -73,7 +68,6 @@ body {
   transition: opacity 1s ease, transform 1s ease;
 }
 
-/* Donation Section Styles */
 .donation-section {
   margin-top: 2rem;
   border-top: 1px dashed  #FF5722;
@@ -149,7 +143,6 @@ body {
   flex-direction: row-reverse;
 }
 
-/* Impact Grid Section */
 .impact-grid-section {
   padding: 4rem 2rem;
   background: #f9f9f9;
@@ -175,7 +168,6 @@ body {
   left: 25%;
 }
 
-/* Image Grid Layout */
 .impact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -189,7 +181,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  aspect-ratio: 4/3; /* Fixed image proportions */
+  aspect-ratio: 4/3; 
 }
 
 .impact-item img {
@@ -199,7 +191,6 @@ body {
   transition: transform 0.5s ease;
 }
 
-/* Hover Effects */
 .caption-overlay {
   position: absolute;
   top: 0;
@@ -260,8 +251,6 @@ body {
   box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .program-card {
     flex-direction: column;
@@ -294,7 +283,6 @@ body {
   }
 }
 
-/* Header/Footer responsive fix */
 @media (max-width: 768px) {
   .container, .hd-container {
     flex-direction: column;
@@ -322,7 +310,6 @@ body {
       <img src="pics/logo.png" alt="Hope for Children Logo" width="150">
     </a>
     
-    <!-- Navigation Menu -->
     <nav class="main-nav">
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -334,24 +321,19 @@ body {
       </ul>
     </nav>
     
-    <!-- Donate Button -->
     <button class="donate-btn" onclick="document.location='donate.html'">Donate Now</button>
   </div>
 </header>
-  <!-- Transparent Background Image -->
   <div class="background-image"></div>
 
-  <!-- Content Wrapper -->
   <main>
-    <!-- Styled Header -->
+  
     <section class="header-section">
       <h1 class="what-we-do">What We Do</h1>
       <div class="underline"></div>
     </section>
 
-    <!-- Program Cards -->
     <section class="programs-container">
-      <!-- Card 1 -->
       <div class="program-card">
         <div class="card-image" style="background-image: url('pics/AOT2.jpg');"></div>
         <div class="card-content">
@@ -368,7 +350,6 @@ body {
     </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="program-card">
         <div class="card-image" style="background-image: url('pics/gojo.jpg');"></div>
         <div class="card-content">
@@ -385,9 +366,9 @@ body {
     </div>
       </div>
 
-          <!-- Program Cards -->
+          
     <section class="programs-container">
-      <!-- Card 1 -->
+      
       <div class="program-card">
         <div class="card-image" style="background-image: url('pics/KAKAROT.jpg');"></div>
         <div class="card-content">
@@ -420,13 +401,12 @@ body {
     </div>
       </div>
 
-      <!-- Add 2 more cards following the same structure -->
     </section>
 
         <section class="impact-grid-section">
   <h2 class="section-title">Our Impact in Action</h2>
   <div class="impact-grid">
-    <!-- Image 1 -->
+
     <div class="impact-item">
       <img src="pics/AOT1.jpg" 
            alt="Children reading books" 
@@ -479,20 +459,18 @@ body {
     <button id="loadMoreBtn" class="see-more-btn" onclick="document.location='stories.html'" >See More Impact</button>
   </div>
     
-    <!-- Repeat for 5-7 more images (ideal grid size) -->
   </div>
 </section>
     
   </main>
  <footer class="site-footer">
   <div class="container">
-    <!-- Logo and Mission -->
     <div class="footer-col">
       <img src="pics/logo.png" alt="Logo" width="120">
       <p>Empowering children to build brighter futures since 2010.</p>
     </div>
     
-    <!-- Quick Links -->
+   
     <div class="footer-col">
       <h3>Quick Links</h3>
       <ul>
@@ -503,7 +481,7 @@ body {
       </ul>
     </div>
     
-    <!-- Contact Info -->
+
     <div class="footer-col">
       <h3>Contact</h3>
       <ul>
@@ -513,7 +491,7 @@ body {
       </ul>
     </div>
     
-    <!-- Social Media -->
+   
     <div class="social-links" style="margin: 20px 0;">
         <p>Other Links</p>
                 <a href="#" style="color: white; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
@@ -524,7 +502,7 @@ body {
      </div>
   </div>
   
-  <!-- Copyright -->
+  
   <div class="copyright">
     <p>&copy; 2025 Hope for Children </p>
     <p>|All rights reserved | Design by Xilef|</p>
@@ -532,7 +510,7 @@ body {
 </footer>
 
   <script>
-    // JavaScript will go here
+
     document.addEventListener('DOMContentLoaded', () => {
   const programCards = document.querySelectorAll('.program-card');
   
@@ -549,7 +527,7 @@ body {
   });
 });
 
-// Animate grid items on scroll
+
 const impactItems = document.querySelectorAll('.impact-item');
 
 const observer = new IntersectionObserver((entries) => {
@@ -568,13 +546,11 @@ impactItems.forEach(item => {
   observer.observe(item);
 });
 
-// Optional: Lightbox for clicked images
 impactItems.forEach(item => {
   item.addEventListener('click', () => {
     const imgSrc = item.querySelector('img').src;
     const caption = item.querySelector('.impact-caption').textContent;
     
-    // Create lightbox (or use a library like Lightbox.js)
     const lightbox = document.createElement('div');
     lightbox.innerHTML = `
       <div class="lightbox-overlay">
